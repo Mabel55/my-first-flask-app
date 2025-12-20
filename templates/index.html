@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Todo List</title>
+</head>
+<body>
+    <h1>My Todo List</h1>
+<form method= "POST">
+    <p>Enter your name:</p>
+    <input type="text" name="my_input" placeholder="Add a new task...">
+    <input type="submit" value= "Add">
+</form>
+
+<hr>
+
+<h3>Tasks:</h3>
+<ul>
+    {% for task in tasks%}
+        <li>{{task.name}}</li>
+    {%  endfor  %}
+</ul>
+
+
+
+</body>
+</html>
