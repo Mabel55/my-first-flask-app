@@ -34,5 +34,17 @@ def home():
     all_tasks = Task.query.all()
     return render_template('index.html', tasks=all_tasks)
 
+@app.route('/delete/<int:id>')
+def delete(id):
+    task_to_delete = Task.query.get_or_404(id)
+    
+    try:
+        db.session.delete(task_to_delete)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return 'There was a problem delecting that task'
+
+
 if __name__ == '__main__':
     app.run(debug=True)
