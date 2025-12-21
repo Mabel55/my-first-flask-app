@@ -44,7 +44,14 @@ def delete(id):
         return redirect('/')
     except:
         return 'There was a problem delecting that task'
+    
+@app.route('/clear')
+def clear():
+    # This commanddelete every single row in the debase
+    db.session.query(Task).delete()
+    db.session.commit()
+    return redirect('/')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
