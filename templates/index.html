@@ -15,21 +15,25 @@
             <input type="text" name="task_input" placeholder="Add a new task..." required>
             <input type="submit" value="Add">
         </form>
-        <div style="margin-top: 10px">
-            <a href="/clear" style="color: #666; font-size: o.8rem;">Clear all tasks</a>
-        </div>
 
-        <hr>
+        <div style="margin-top: 10px;">
+            <a href="/clear" style="color: #999; text-decoration: none; font-size: 0.8rem;">Clear All Tasks</a>
+        </div>
 
         <ul>
             {% for task in tasks %}
-                <li>
-                    <span>{{ task.name }}</span>
-                    <a href="/delete/{{ task.id }}">Delete</a>
-                </li>
+            <li style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee;">
+                
+                <span class="{% if task.complete %}done{% endif %}"> {{ task.name }} </span>
+                
+                <div>
+                    <a href="/update/{{ task.id }}" style="text-decoration: none; margin-right: 10px;">✅</a>
+                    <a href="/delete/{{ task.id }}" style="text-decoration: none;">❌</a>
+                </div>
+
+            </li>
             {% endfor %}
         </ul>
-    </div>
 
-</body>
+    </div> </body>
 </html>

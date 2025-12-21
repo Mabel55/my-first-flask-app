@@ -12,6 +12,7 @@ db = SQLAlchemy(app)
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
+    complete = db.Column(db.Boolean, default=False)
 
 # Create the database file
 with app.app_context():
@@ -33,6 +34,13 @@ def home():
     # They must be aligned with the 'if', NOT inside it.
     all_tasks = Task.query.all()
     return render_template('index.html', tasks=all_tasks)
+
+@app.route('/update/<int:id>')
+def update(id):
+    task = Task.query.get_or_404(id)
+    task.complete = not task.complete
+    db.session.commit()
+    return redirect('/')
 
 @app.route('/delete/<int:id>')
 def delete(id):
