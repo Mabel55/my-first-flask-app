@@ -1,72 +1,90 @@
+/* General page Styling */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+background-color: #f0f2f5; /* light gray-blue background */
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+color: #333;
+margin: 0;
+padding: 20px;
+display: flex;
+flex-direction: column;
+flex-direction: column;
+align-items: center;
 }
 
-.container {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    width: 350px;
-    text-align: center;
-}
-
+/* The Main Title */
 h1 {
-    color: #333;
+    color: #1a73e8;
+    margin-bottom: 20px;
+
+}
+
+/* The input form */
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 500px;
+
 }
 
 input[type="text"] {
-    width: 70%;
+    flex-grow: 1;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 5px;
+    outline: none;
 }
 
 input[type="submit"] {
-    padding: 10px 15px;
-    background-color: #28a745;
+    background-color: #1a73e8;
     color: white;
     border: none;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 input[type="submit"]:hover {
-    background-color: #218838;
+    background-color: #1557b0;
+
 }
 
+/* the list of task*/
 ul {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
+    width: 0;
+    max-width: 540px;
+    margin-top: 20px;
+
 }
 
+/* Individual task Items*/
 li {
-    background: #fff;
-    border-bottom: 1px solid #ddd;
-    padding: 10px;
+    background: white;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
+
 }
 
+/* Links */
 a {
-    color: #dc3545;
     text-decoration: none;
+    color: #d93025;
     font-weight: bold;
-    font-size: 0.9rem;
 }
 
-a:hover {
-    text-decoration: underline;
-}
 
-.done {
-    text-decoration: line-through;
-    color: #888;
-}
+
+
+
