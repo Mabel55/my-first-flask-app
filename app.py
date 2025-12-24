@@ -1,7 +1,10 @@
 # FIX 1: Added 'redirect' to the list of imports here
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
+from datetime import datetime
+import pandas as pd
+import os
 
 app = Flask(__name__)
 
@@ -9,6 +12,12 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
 app.config['SECRET_KEY'] = 'thisisasecrectkey' # needed for encryption
 db = SQLAlchemy(app)
+
+class Todo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(200), nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    # ... (and maybe a user_id line)
 
 # login Manager setup
 login_manager = LoginManager()
@@ -70,21 +79,25 @@ def update(id):
 @login_required
 def delete(id):
     # only to find the task if it belong to the current user
-    task_to_delete = Task.query.filter_by(id=id, user_id=current_user.id).first_or-404()
+    task_to_delete = Task.query.get_or_404(id)
     
-    try:
+    # Check if this task actually belongs to the persontrying to delete it
+    if task_to_delete.user_id == current_user.id:
         db.session.delete(task_to_delete)
         db.session.commit()
-        return redirect('/')
-    except:
-        return 'There was a problem delecting that task'
+    return redirect(url_for('index'))
+    
+        
     
 @app.route('/clear')
+@login_required
 def clear():
     # This commanddelete every single row in the debase
-    db.session.query(Task).delete()
+    Task.query.filter_by(user_id=current_user.id).delete()
+    
+    
     db.session.commit()
-    return redirect('/')
+    return redirect(url_for('index'))
 
 
 # --- REGISTER ROUTE---
